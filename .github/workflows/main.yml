@@ -20,12 +20,12 @@ jobs:
           context : ./src
           push : true
           file : ./src/Dockerfile
-          tag : "vinibressanini/shop:2.0"
+          tags : vinibressanini/shop:2.0
       - run: echo "Enviar a Imagem Docker para o DockerHub"
   CD:
     needs : [CI]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Obter Código"
-      - run: echo "Executar Docker Build"
-      - run: echo "Enviar a Imagem Docker para o DockerHub"
+      - run: echo "Obter o Codigo"
+      - run: echo "Configurar kubeconfig"
+      - run: echo "Executar o Apply"
