@@ -44,6 +44,7 @@ kind: Deployment
 metadata:
   name: fakeshop
 spec:
+  replicas : 10
   selector:
     matchLabels:
       app: fakeshop
@@ -54,7 +55,7 @@ spec:
     spec:
       containers:
         - name: fakeshop
-          image: vinibressanini/shop:1.0
+          image: vinibressanini/shop:2.0
           ports:
             - containerPort: 5000
           env:
@@ -70,18 +71,15 @@ spec:
               value: "5432"
             - name: FLASK_APP
               value: index.py
-          resources:
-            limits:
-              memory: 1024M
-              cpu: "1"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: fakeshop
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
-    - port: 5000
+    - port: 80
+      targetPort: 5000
   selector:
     app: fakeshop
