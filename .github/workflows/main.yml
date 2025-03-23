@@ -7,8 +7,20 @@ jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Obter Código"
-      - run: echo "Executar Docker Build"
+      - name: Obtendo Codigo
+        uses: actions/actions/checkout@v4.2.2
+      - name : Executando Docker Login
+        uses : docker/login-action@v3.4.0
+        with :
+          username: ${{secrets.DOCKERHUB_USER}}
+          password: ${{secrets.DOCKERHUB_PASSWORD}}
+      - name : Construindo Imagem Docker
+        uses : docker/build-push-action@v6.15.0
+        with :
+          context : ./src
+          push : true
+          file : ./src/Dockerfile
+          tag : vinibressanini/shop:2.0
       - run: echo "Enviar a Imagem Docker para o DockerHub"
   CD:
     needs : [CI]
