@@ -11,6 +11,7 @@ jobs:
       - run: echo "Executar Docker Build"
       - run: echo "Enviar a Imagem Docker para o DockerHub"
   CD:
+    needs : [CI]
     runs-on: ubuntu-latest
     steps:
       - run: echo "Obter Código"
