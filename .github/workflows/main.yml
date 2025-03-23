@@ -20,7 +20,7 @@ jobs:
           context : ./src
           push : true
           file : ./src/Dockerfile
-          tag : vinibressanini/shop:2.0
+          tag : "vinibressanini/shop:2.0"
       - run: echo "Enviar a Imagem Docker para o DockerHub"
   CD:
     needs : [CI]
