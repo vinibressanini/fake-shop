@@ -26,6 +26,16 @@ jobs:
     needs : [CI]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Obter o Codigo"
-      - run: echo "Configurar kubeconfig"
-      - run: echo "Executar o Apply"
+      - name : Obtendo Codigo
+        uses : actions/checkout@v4
+      - name : Configurando kubeconfig
+        uses : azure/k8s-set-context@v4
+        with : 
+          method : kubeconfig
+          kubeconfig : ${{secrets.K8S_KUBECONFIG}}        
+      - name : Apply Deployment
+      - uses: Azure/k8s-deploy@v5
+        with:
+          manifests: |
+            k8s/deployment.yaml
+          images: vinibressanini/shop:2.0
