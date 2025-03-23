@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Obtendo Codigo
-        uses: actions/actions/checkout@v4.2.2
+        uses: actions/checkout@v4
       - name : Executando Docker Login
         uses : docker/login-action@v3.4.0
         with :
